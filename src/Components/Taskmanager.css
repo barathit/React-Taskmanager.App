@@ -1,0 +1,822 @@
+/* Root Variables for Theme */
+:root {
+  --primary-color: #6c63ff;
+  --secondary-color: #ff6b6b;
+  --accent-color: #4ecdc4;
+  --background-gradient-start: #21243d;
+  --background-gradient-end: #0f3460;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --text-color: white;
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --success-color: #4ecdc4;
+  --warning-color: #ffd166;
+}
+
+/* General Styles with Enhanced Animation */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--background-gradient-start),
+    var(--background-gradient-end)
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Task Manager Container with Glass Morphism */
+.task-manager {
+  width: 400px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-color), 0 0 20px rgba(108, 99, 255, 0.2);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-color);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.task-manager:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--shadow-color), 0 0 30px rgba(108, 99, 255, 0.3);
+}
+
+.task-manager::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(30deg);
+  animation: shimmer 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Heading Animation */
+.task-manager h1 {
+  color: var(--text-color);
+  margin-bottom: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.task-manager h1::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--primary-color);
+  animation: headingUnderline 1.5s forwards ease-out;
+}
+
+@keyframes headingUnderline {
+  to {
+    width: 100%;
+  }
+}
+
+/* Add Task Input with Animated Focus */
+.add-task-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.add-task-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: white;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.add-task-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.add-task-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
+}
+
+.add-task-input:focus::placeholder {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+/* Add Task Button with Pulse and Hover Effects */
+.add-task-btn {
+  background: var(--primary-color);
+  color: white;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.add-task-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.add-task-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
+}
+
+.add-task-btn:hover::before {
+  animation: shine 1s ease-in-out;
+}
+
+.add-task-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 10px rgba(108, 99, 255, 0.3);
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Add Task Button Pulse Animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+  }
+}
+
+/* Task List with Scroll Animation */
+.task-list-container {
+  max-height: 350px;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+.task-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-list-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.task-list-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.task-list-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+.task-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Task Items with Appear Animation */
+.task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 18px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideIn 0.5s forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-list li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.task-list li:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.task-list li:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.task-list li:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.task-list li:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.task-list li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.task-list li:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-list li:hover::before {
+  transform: translateX(100%);
+}
+
+/* Task Text with Checkbox */
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex: 1;
+  text-align: left;
+}
+
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.task-checkbox:checked {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.task-checkbox:checked::before {
+  content: "✓";
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+}
+
+.task-text {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Completed Task with Strike Through Animation */
+.task-list .completed .task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-list .completed {
+  border-left-color: var(--success-color);
+  background: rgba(78, 205, 196, 0.05);
+}
+
+/* Delete Button with Hover and Focus Effects */
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.task-list .delete {
+  background: var(--secondary-color);
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  opacity: 0.8;
+}
+
+.task-list .delete:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.5);
+}
+
+.task-list .delete:active {
+  transform: scale(0.95);
+}
+
+/* Empty List Animation */
+.empty-list {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  padding: 20px;
+  text-align: center;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Add New Task Animation */
+@keyframes addTaskAnimation {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.task-list li.new-task {
+  animation: addTaskAnimation 0.5s forwards;
+}
+
+/* Delete Task Animation */
+@keyframes deleteTaskAnimation {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.task-list li.delete-animation {
+  animation: deleteTaskAnimation 0.5s forwards;
+}
+
+/* Priority Indicators */
+.priority-high {
+  border-left-color: var(--secondary-color);
+}
+
+.priority-medium {
+  border-left-color: var(--warning-color);
+}
+
+.priority-low {
+  border-left-color: var(--accent-color);
+}
+
+/* Task Counter */
+.task-counter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color);
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Clear All Button */
+.clear-all-btn {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--secondary-color);
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.clear-all-btn:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+/* Task Filter Buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.filter-btn.active {
+  background: var(--primary-color);
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+}
+
+.filter-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* App Loading Animation */
+.app-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Option 1: Deep Ocean Gradient */
+body.ocean-theme {
+  background: linear-gradient(135deg, #1a2980, #26d0ce);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 2: Purple Dream Gradient */
+body.purple-theme {
+  background: linear-gradient(135deg, #4a148c, #880e4f);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 3: Sunset Gradient */
+body.sunset-theme {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 4: Northern Lights */
+body.northern-lights {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 5: Midnight City */
+body.midnight-city {
+  background: linear-gradient(135deg, #232526, #414345);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 6: Cosmic Fusion */
+body.cosmic-fusion {
+  background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+}
+
+/* Option 7: Miami Sunset */
+body.miami-sunset {
+  background: linear-gradient(135deg, #fc5c7d, #6a82fb);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 8: Deep Space */
+body.deep-space {
+  background: linear-gradient(135deg, #000428, #004e92);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Option 9: Twilight Spark */
+body.twilight {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+}
+
+/* Option 10: Emerald Water */
+body.emerald {
+  background: linear-gradient(135deg, #348f50, #56b4d3);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* To create a theme switcher, you could add this JavaScript */
+/* 
+const themeButtons = document.querySelectorAll('.theme-button');
+themeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove all theme classes
+    document.body.classList.remove(
+      'ocean-theme', 
+      'purple-theme', 
+      'sunset-theme', 
+      'northern-lights', 
+      'midnight-city',
+      'cosmic-fusion',
+      'miami-sunset',
+      'deep-space',
+      'twilight',
+      'emerald'
+    );
+    
+    // Add the selected theme class
+    document.body.classList.add(button.dataset.theme);
+    
+    // Save preference to localStorage
+    localStorage.setItem('taskManagerTheme', button.dataset.theme);
+  });
+});
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem('taskManagerTheme');
+if (savedTheme) {
+  document.body.classList.add(savedTheme);
+} else {
+  document.body.classList.add('purple-theme'); // Default theme
+}
+*/
+
+/* Animated Gradient Movement */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Optional: Add a subtle pattern overlay for more texture */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* Media Query Breakpoints */
+/* These will make the task manager fully responsive */
+
+/* Base container responsiveness */
+.task-manager {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Small mobile devices (up to 480px) */
+@media (max-width: 480px) {
+  .task-manager {
+    width: 95%;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .add-task-input {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .add-task-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .task-list li {
+    padding: 12px;
+  }
+
+  .task-text {
+    font-size: 14px;
+  }
+
+  .filter-buttons {
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}
+
+/* Medium devices (tablets, 481px to 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .task-manager {
+    width: 85%;
+    max-width: 450px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+/* Large devices (laptops/desktops, 769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .task-manager {
+    max-width: 500px;
+  }
+}
+
+/* Extra large devices (large desktops, 1025px and up) */
+@media (min-width: 1025px) {
+  .task-manager {
+    max-width: 550px;
+  }
+
+  .task-list-container {
+    max-height: 400px;
+  }
+}
+
+/* Handling viewport height for different devices */
+@media (max-height: 700px) {
+  .task-list-container {
+    max-height: 250px;
+  }
+}
+
+/* Make task form more responsive */
+@media (max-width: 480px) {
+  .add-task-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-task-input {
+    margin-bottom: 10px;
+  }
+}
+
+/* Theme switcher responsiveness */
+@media (max-width: 480px) {
+  .theme-options {
+    gap: 6px;
+  }
+
+  .theme-button {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 320px) {
+  .task-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-actions {
+    margin-top: 8px;
+    align-self: flex-end;
+  }
+
+  .filter-buttons {
+    gap: 5px;
+  }
+
+  .filter-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* Landscape mode adjustments for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .task-manager {
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  .task-list-container {
+    max-height: 150px;
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+}
